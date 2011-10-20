@@ -1,0 +1,102 @@
+% math1_1.tex
+\documentclass[a4paper]{article}
+\usepackage{a4wide}
+\usepackage{german}
+\usepackage[latin1]{inputenc}
+%\usepackage{uebungen}
+%------------------
+% section-Zaehler wird neu gesetzt:
+\setcounter{section}{0}
+%------------------
+\author{Sascha Meiers, Martin Seeger}
+\title{Exercise 0, Discrete Mathematics for Bioinformatics}
+\date{Winter term 2011/2012}
+
+\begin{document}
+\maketitle
+
+%\section{Title}
+
+\subsection{Background Reading I}
+
+The six (not seven) statements: 
+
+\begin{enumerate}
+  \item {\it Conceptualizing, not programming.} Agree.
+  \item {\it Fundamental, not rote skill.} Disagree.
+  \item {\it A way that humans, not computers, think.} Disagree.
+  \item {\it Complements and combines mathematical and engineering thinking.}
+  Agree.
+  \item {\it Ideas, not artifacts.} Agree.
+  \item {\it For everyone, everywhere.} Disagree.
+\end{enumerate}
+
+{\bf Statement of strongest agreement:} {\it Ideas, not artifacts.}
+
+Jeanette Wing states that computational concepts will be ``present everywhere and
+touch our lives all the time'', besides also the ``software and hardware
+artifacts'' that represent them. We would like to argue that this time has
+already come by means of two prominent examples:
+\begin{itemize}
+  \item Social networks are an area in which graph theory has invaded human
+  thinking (and probably vice versa). Thanks to the ubiquity of social networks,
+  and their mobile availability, participants have stopped thinking about the
+  hardware or software on which Facebook or other social applications are
+  running. However, they do (usually unknowingly) think about graph 
+  theoretical concepts such as connectivity, distances etc. which was certainly less common before the rise
+  of social networks.
+  \item Similarly, navigation and geolocation systems help manage our daily
+  lives and make (some of) us think about a whole other range of problems, e.g.
+  how to calculate shortest paths.
+\end{itemize}
+
+One could add further examples, such as optimization and search
+problems which have recently arrived in a large part of the broad population and
+have begun to shape their thinking.
+\\
+
+{\bf Statement of strongest disagreement:} {\it For everyone, everywhere.}
+
+Having argued in the previous paragraph that computational concepts are
+ubiquitous and influence our lives already now, we would now claim that this
+does probably not happen in the way the author envisages when she says
+it might become ``so integral to human
+endeavors'' that ``it disappears as an explicit philosophy''. It is wishful
+thinking to believe that more than a minority of the population would
+significantly change their attitude towards computational thinking which she
+likens to mathematical and engineering thinking in one of the earlier
+statements.
+
+Realistically, the majority of the population will not change their style of
+thinking and their attitude towards mathematics or computer science by more
+exposure to social networks, for example, or to other manifestations of
+computing techniques. For this to happen, profound and significant changes would have to
+occur in early education and even then ``computational thinking for everyone''
+will remain an illusion. People will stay the way they are, pretty much, no
+matter how much computation is happening around them.
+
+\subsection{Background Reading II}
+
+If $n=0$ is permitted, then it is the smallest such value since $0\leq 2^0$.
+Otherwise, the inequality
+\begin{equation}
+100 n^2 \leq 2^n
+\end{equation}
+needs to be solved for minimal $n>0$. One finds up to $n=14$, at which
+\begin{equation}
+100 \cdot 14^2 = 19600 > 2^{14} = 16384,
+\end{equation}
+whereas for $n=15$
+\begin{equation}
+100 \cdot 15^2 = 22500 \leq 2^{15}= 32768.
+\end{equation}
+Hence, 15 is the smallest value such that the quadratic algorithm runs faster.
+
+\subsection{Background Reading III}
+
+Example of a Monte Carlo algorithm: numerical integration, in particular in high
+dimensions.
+
+\noindent Example of a Las Vegas algorithm: randomized Quick Sort.
+
+\end{document}
