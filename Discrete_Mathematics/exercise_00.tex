@@ -78,26 +78,36 @@ matter how much computation is happening around them.
 
 \subsection{Background Reading II}
 
-If $n=0$ is permitted, then it is the smallest such value since $0\leq 2^0$.
-Otherwise, the inequality
-\begin{equation}
-100 n^2 \leq 2^n
-\end{equation}
-needs to be solved for minimal $n>0$. One finds up to $n=14$, at which
-\begin{equation}
-100 \cdot 14^2 = 19600 > 2^{14} = 16384,
-\end{equation}
-whereas for $n=15$
-\begin{equation}
-100 \cdot 15^2 = 22500 \leq 2^{15}= 32768.
-\end{equation}
-Hence, 15 is the smallest value such that the quadratic algorithm runs faster.
+Let an arbitrary sequence $s = \{x_1, \ldots x_n\}$ be given. Using Merge Sort,
+this sequence can be sorted in $\Theta(n \lg n)$.
+
+Let a number $y$ be given. The task is to determine whether $s$ contains
+multiple occurences of $y$. This is done with the following pseudocode:
+
+\begin{verbatim}
+z_1, ..., z_n = merge_sort(x_1, ..., x_n)
+for i = 2 to n:
+    if y==z_i and y==z_(i-1): print "multiple occurence:", y
+\end{verbatim}
+
+This codes has total runtime $\Theta(n \lg n) + \Theta(n) = \Theta(n \lg n)$.
+
+If the task is, however, to determine whether any of the $x_i$ occurs 
+in $s$ multiple times, then the following pseudocode can be applied:
+
+\begin{verbatim}
+z_1, ..., z_n = merge_sort(x_1, ..., x_n)
+for i = 2 to n:
+    if z_i==z_(i-1): print "multiple occurence:", z_i
+\end{verbatim}
+
+Again, the runtime is $\Theta(n \lg n)$.
 
 \subsection{Background Reading III}
 
 Example of a Monte Carlo algorithm: numerical integration, in particular in high
 dimensions.
 
-\noindent Example of a Las Vegas algorithm: randomized Quick Sort.
+\noindent Example of a Las Vegas algorithm: Randomized Quick Sort.
 
 \end{document}
