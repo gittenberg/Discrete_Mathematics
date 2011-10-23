@@ -49,6 +49,7 @@ inequality. Marked in red are the edges that are selected by the Kruskal
 algorithm.
 \\
 
+\begin{figure}
 \begin{tikzpicture}
 % Default actions for each node
 \tikzstyle{every node}=[draw];
@@ -83,6 +84,7 @@ algorithm.
 (v3) -- node[weight, left=1ex, above=3ex] {\footnotesize 5} (v6)
 ;
 \end{tikzpicture}
+\end{figure}
 
 The following algorithm (borrowed from Wikipedia) delivers a 2-approximation:
 \begin{enumerate}
@@ -143,9 +145,14 @@ exact solution.
 \end{tikzpicture}
 \end{figure}
 
-b)
-
-x
+\noindent b) A 2-approximation is worse by at most a factor of two than the
+optimal solution for any input (i.e. for any graph). The Eulerian trail constructed in the
+intermediate step has two times the weight of a minimal spanning tree. By
+repeatedly taking shortcuts, its weight can only be reduced, hence
+\[
+w({\rm approximation}) \leq w({\rm Eulerian\ trail}) = 2 w({\rm MST}) \leq 2
+w({\rm optimal\ solution}).\square
+\] 
 
 
 \subsection{Landau Symbols}
