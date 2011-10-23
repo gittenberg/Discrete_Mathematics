@@ -2,6 +2,7 @@
 \documentclass[a4paper]{article}
 \usepackage{a4wide}
 \usepackage{german}
+\usepackage{amssymb}
 \usepackage[latin1]{inputenc}
 %\usepackage{uebungen}
 %------------------
@@ -23,7 +24,46 @@ x
 
 \subsection{Landau Symbols}
 
-x
+\renewcommand{\labelenumi}{\alph{enumi})}
+\begin{enumerate}
+\item Let $k, l \in \mathbb{Z}$, $k > l$. $f = o(g)$ holds iff 
+\begin{equation}
+\lim_{n\rightarrow \infty} \left|\frac{f(n)}{g(n)}\right| = 0. 
+\end{equation}
+In our case, 
+\begin{equation}
+\lim_{n\rightarrow \infty} \left|\frac{f(n)}{g(n)}\right| = \lim_{n\rightarrow
+\infty} \left|\frac{n^l}{n^k}\right| = \lim_{n\rightarrow
+\infty} \left|\frac{1}{n^{k-l}}\right| = 0,
+\end{equation}
+whence it follows that $n^l=o(n^k)$.$\square$
+
+\item Let $k, l \in \mathbb{N}$, $k > l$. In general, $f=\Theta(g)$ iff
+$f=O(g)$ and $g=O(f)$. We use the definition $f=O(g)$ iff
+\begin{equation}
+0 \leq \limsup_{n\rightarrow \infty} \left|\frac{f(n)}{g(n)}\right| < \infty. 
+\end{equation}
+In our case, 
+\begin{equation}
+\limsup_{n\rightarrow \infty} \left|\frac{n^k+n^l}{n^k}\right| =
+\limsup_{n\rightarrow \infty} \left|1 + \frac{1}{n^{k-l}}\right| = 1,
+\end{equation}
+and
+\begin{equation}
+\limsup_{n\rightarrow \infty} \left|\frac{n^k}{n^k+n^l}\right| =
+\limsup_{n\rightarrow \infty} \left|1 - \frac{n^l}{n^k+n^l}\right| =
+\limsup_{n\rightarrow \infty} \left|1 - \frac{1}{n^{k-l}+1}\right| =
+1.\square
+\end{equation}
+ 
+\item Counterexample: $f(n)=2^{cn}$ with $c>1$ is clearly $2^{O(n)}$. However, 
+\begin{equation}
+\limsup_{n\rightarrow \infty} \left|\frac{2^{cn}}{2^{n}}\right| =
+\limsup_{n\rightarrow \infty} 2^{(c-1)n} = \infty,
+\end{equation}
+hence $f \neq O(2^n)$.$\square$
+\end{enumerate}
+
 
 \subsection{Amortized Analysis}
 
