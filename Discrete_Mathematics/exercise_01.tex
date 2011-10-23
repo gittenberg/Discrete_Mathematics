@@ -45,7 +45,8 @@
 \subsection{MST Approximation}
 
 a) The following complete graph with six nodes satisfies the triangle
-inequality.
+inequality. Marked in red are the edges that are selected by the Kruskal
+algorithm.
 \\
 
 \begin{tikzpicture}
@@ -62,12 +63,13 @@ inequality.
 \node [shape=circle] (v6) at (300:4) {$v_6$};
 % Draw radial edges
 \draw 
-(v1) -- node[weight, label=right:\footnotesize $1$] {} (v2) 
-(v2) -- node[weight, label=above:\footnotesize $1$] {} (v3)
-(v3) -- node[weight, label=left:\footnotesize $1$] {} (v4)
-(v4) -- node[weight, label=left:\footnotesize $1$] {} (v5)
-(v5) -- node[weight, label=below:\footnotesize $1$] {} (v6) 
-(v6) -- node[weight, label=right:\footnotesize $1$] {} (v1)
+(v1) [color=red] -- node[weight, label=right:\footnotesize 1] {} (v2)
+(v2) -- node[weight, label=above:\footnotesize 1] {} (v3)
+(v3) -- node[weight, label=left:\footnotesize 1] {} (v4)
+(v4) -- node[weight, label=left:\footnotesize 1] {} (v5)
+(v5) -- node[weight, label=below:\footnotesize 1] {} (v6);
+\draw 
+(v6) [color=black] -- node[weight, label=right:\footnotesize 1] {} (v1)
 
 (v1) -- node[weight, right=1ex] {\footnotesize 3} (v3) 
 (v4) -- node[weight, left=1ex] {\footnotesize 3} (v2) 
@@ -81,6 +83,65 @@ inequality.
 (v3) -- node[weight, left=1ex, above=3ex] {\footnotesize 5} (v6)
 ;
 \end{tikzpicture}
+
+The following algorithm (borrowed from Wikipedia) delivers a 2-approximation:
+\begin{enumerate}
+  \item Construct the minimum spanning tree.
+  \item Duplicate all its edges. This gives us an Eulerian graph.
+  \item Find a Eulerian cycle in it. Clearly, its length is twice the length of
+  the tree. 
+  \item Convert the Eulerian cycle into the Hamiltonian one in the following
+  way: walk along the Eulerian cycle, and each time you are about to come into
+  an already visited vertex, skip it and try to go to the next one (along the
+  Eulerian cycle).
+\end{enumerate}
+    
+Carrying out this algorithm on the above graph visits the vertices in the
+following order: 
+\begin{eqnarray}
+& & v_1 \rightarrow v_2 \rightarrow v_3 \rightarrow v_4
+\rightarrow v_5 \rightarrow v_6\nonumber \\
+& & \rightarrow v_5\ {\rm (skipped)} \rightarrow
+v_4\ {\rm (skipped)} \rightarrow v_3\ {\rm (skipped)} \rightarrow v_2\ {\rm
+(skipped)} \rightarrow v_1.\nonumber 
+\end{eqnarray}
+The resulting approximation to the TSP is displayed below. It happens to be the
+exact solution.
+\begin{figure}
+\begin{tikzpicture}
+% Default actions for each node
+\tikzstyle{every node}=[draw];
+\tikzstyle{edge} = [draw,thick,-]
+\tikzstyle{weight} = [font=\tiny, draw=none, fill=none]
+% Define and draw five nodes
+\node [shape=circle] (v1) at (0:4) {$v_1$};
+\node [shape=circle] (v2) at (60:4) {$v_2$};
+\node [shape=circle] (v3) at (120:4) {$v_3$};
+\node [shape=circle] (v4) at (180:4) {$v_4$};
+\node [shape=circle] (v5) at (240:4) {$v_5$};
+\node [shape=circle] (v6) at (300:4) {$v_6$};
+% Draw radial edges
+\draw 
+(v1) [color=green] -- node[weight, label=right:\footnotesize 1] {} (v2)
+(v2) -- node[weight, label=above:\footnotesize 1] {} (v3)
+(v3) -- node[weight, label=left:\footnotesize 1] {} (v4)
+(v4) -- node[weight, label=left:\footnotesize 1] {} (v5)
+(v5) -- node[weight, label=below:\footnotesize 1] {} (v6)
+(v6) -- node[weight, label=right:\footnotesize 1] {} (v1);
+\draw 
+(v1) -- node[weight, right=1ex] {\footnotesize 3} (v3) 
+(v4) -- node[weight, left=1ex] {\footnotesize 3} (v2) 
+(v3) -- node[weight, above left=0.25ex] {\footnotesize 3} (v5) 
+(v4) -- node[weight, left=1ex] {\footnotesize 3} (v6) 
+(v5) -- node[weight, right=1ex] {\footnotesize 3} (v1) 
+(v6) -- node[weight, above right=0.25ex] {\footnotesize 3} (v2) 
+
+(v1) -- node[weight, right=6ex, above=0.25ex] {\footnotesize 5} (v4) 
+(v2) -- node[weight, right=1ex, above=3ex] {\footnotesize 5} (v5)
+(v3) -- node[weight, left=1ex, above=3ex] {\footnotesize 5} (v6)
+;
+\end{tikzpicture}
+\end{figure}
 
 b)
 
