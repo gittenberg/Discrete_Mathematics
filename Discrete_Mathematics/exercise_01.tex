@@ -203,9 +203,10 @@ hence $f \neq O(2^n)$.$\square$
 The array size must be multiplied by a constant factor in order to guarantee an armotized constant runtime. We would prefer to double the size whenever the push operation is called and the array is already full.
 
 \subsubsection{The accounting method}
-Let's say each push operation gains us 2\EUR and copying the array costs 1\EUR per element that is copied. We want to show that no matter how many push operations are performed, our credit never falls below zero.
 
-Let's assume an array has just been doubled to $2n$ and the credit is $\geq 0$. Now we can perform the next $n$ push operations, each one adding 2\EUR to our account. When the number of 2n is reached, we own at least $2n$\EUR. Then the complete array with all its $2n$ elements is copied again, which costs exactly $2n$\EUR. Afterwards the account remains $\geq 0$.
+Let's say each push operation gains us 2 EUR and copying the array costs 1 EUR per element that is copied. We want to show that no matter how many push operations are performed, our credit never falls below zero.
+
+Let's assume an array has just been doubled to $2n$ and the credit is $\geq 0$. Now we can perform the next $n$ push operations, each one adding 2 EUR to our account. When the number of 2n is reached, we own at least $2n$ EUR. Then the complete array with all its $2n$ elements is copied again, which costs exactly $2n$ EUR. Afterwards the account remains $\geq 0$.
 
 \subsubsection{The potential method}
 We take $\phi = 2k-n$ as the potential function, where $k$ is the number of elements in the array and $n$ the allocated size. 
