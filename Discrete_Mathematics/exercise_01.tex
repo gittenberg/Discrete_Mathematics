@@ -200,7 +200,29 @@ hence $f \neq O(2^n)$.$\square$
 
 \subsection{Amortized Analysis}
 
-x
+The array size must be multiplied by a constant factor in order to guarantee an armotized constant runtime. We would prefer to double the size whenever the push operation is called and the array is already full.
+
+\subsubsection{The accounting method}
+Let's say each push operation gains us 2\EUR and copying the array costs 1\EUR per element that is copied. We want to show that no matter how many push operations are performed, our credit never falls below zero.
+
+Let's assume an array has just been doubled to $2n$ and the credit is $\geq 0$. Now we can perform the next $n$ push operations, each one adding 2\EUR to our account. When the number of 2n is reached, we own at least $2n$\EUR. Then the complete array with all its $2n$ elements is copied again, which costs exactly $2n$\EUR. Afterwards the account remains $\geq 0$.
+
+\subsubsection{The potential method}
+We take $\phi = 2k-n$ as the potential function, where $k$ is the number of elements in the array and $n$ the allocated size. 
+For the empty data structure $D_0$, this potential is zero $(k=n=0)$. Further values are $D_1 = 1$ ($n=k=1$), $D_2=2$, $D_3 = 2$, 
+$D_4=4$, $D_5=2$, $D_6=4$, $\ldots$ 
+
+One can easily see that this function never falls below zero, since the array is always at 
+least half filled. So we have $D_i \geq D_0 \;  \forall i$, which a proper potential function must hold. Now we'll have a look at the amortized costs of a push operation, differing two cases:
+\begin{enumerate}
+\item step $i$ does not double the array. Then the actual cost is $c_i = 1$ and the amortized cost 
+	\[ \hat{c_i} = c_i + \phi(D_{i}) - \phi(D_{i-1}) = 1 + (2k-n) - (2k-2-n) = 3\]
+\item step $i$ doubles the array size. Then the actual cost is $c_i = 1 + k$ because $k$ elements have 
+	to be copied into a new array. The amportized cost is
+	\[ \hat{c_i} = c_i + \phi(D_{i}) - \phi(D_{i-1}) = 1+k + (2k-2n) - (2k-2-n) = 3 -k + n\]
+But the array was only doubled because it was completely filled, i.e. $k=n$. This leads to a constant amortized runtime of 3 even when the array is doubled.
+
+\end{enumerate}
 
 
 \subsection{Analysis of \textsc{Select} algorithm}
