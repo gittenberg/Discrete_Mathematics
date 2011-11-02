@@ -1,0 +1,77 @@
+% Koma class
+\documentclass[a4paper, oneside]{scrartcl}   
+
+\usepackage{a4wide}
+\usepackage{german}
+
+%------------------
+% language = english
+\usepackage[english]{babel}	% Umlaute mit \"u
+\usepackage[latin1]{inputenc}
+
+% margins + Kopf- und Fuﬂzeilen
+\usepackage[left = 2.5cm, right = 2.5cm, top = 2cm, bottom = 3cm]{geometry}
+\usepackage{scrpage2} 
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\rehead{\headmark}
+\lehead{\pagemark}
+\lohead{\headmark}
+\rohead{\pagemark} 
+
+
+% math
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% figures
+\usepackage{tikz}
+\usepackage{graphicx}
+
+
+% section-Zaehler wird neu gesetzt:
+\setcounter{section}{2}
+%------------------
+\author{Sascha Meiers, Martin Seeger}
+\title{Exercise 2, Discrete Mathematics for Bioinformatics}
+\date{Winter term 2011/2012}
+
+
+\begin{document}
+\maketitle
+
+%---------------------------------------------------------------------------------------------------
+
+\subsection{Modulo Arithmetic}
+
+\noindent a) We show that $\langle a \rangle \subset \langle d \rangle$.
+
+Since $d = \mathrm{gcd}(a, n)$, there is a $k \in \mathbb{N}$ such that $a = kd$.
+Hence, if $v \in \langle a \rangle$, i.e. $v = ai \mod n$, then $v = dki \mod n$ which implies that $v \in \langle d \rangle$.
+\\
+
+\noindent b) We show that $\langle a \rangle \supset \langle d \rangle$.
+
+Any element $v$ of $\langle d \rangle$ can be written as $v = di\mod n$ (*).
+On the other hand, $v \in \langle a \rangle$ iff $v = aj\mod n$.
+
+We now use Bezout's lemma to find $x$, $y$, such that $ax + ny = d$. This is inserted into (*) to yield
+\[
+v = di\mod n = (ax + ny)i\mod n = axi\mod n.
+\]
+In other words, $v \in \langle a \rangle$. $\square$
+\\
+
+\subsection{Hashing}
+
+x
+
+\subsection{Hashing}
+
+x
+
+\subsection{Expected value}
+
+x
+
+\end{document}
