@@ -2,11 +2,10 @@
 \documentclass[a4paper, oneside]{scrartcl}   
 
 \usepackage{a4wide}
-\usepackage{german}
 
 %------------------
 % language = english
-\usepackage[english]{babel}	% Umlaute mit \"u
+\usepackage[english, german]{babel}	% Umlaute mit \"u
 \usepackage[latin1]{inputenc}
 
 % margins + Kopf- und Fuﬂzeilen
@@ -64,7 +63,22 @@ In other words, $v \in \langle a \rangle$. $\square$
 
 \subsection{Hashing}
 
-x
+Let $x,y$ be character strings both of length $n$. Now we can interprete their characters 
+as numbers in radix $2^p$, leading to a hash function 
+\[h(x) = \sum\limits_{i=0}^n x_i 2^{p\cdot i} \text{ mod } 2^p-1\]
+If $y$ is nothing else than a permutation of the characters in $x$, 
+then especially their sum of the digits is equal, i.e.
+\[ \sum\limits_{i=0}^n x_i = \sum\limits_{i=0}^n y_i  \]
+Proof: $h(x) = h(y)$
+\begin{align}
+h(x) &= \sum\limits_{i=0}^n x_i 2^{p\cdot i} \text{ mod } 2^p-1  \\
+     &= \sum\limits_{i=0}^n \left( x_i 2^{p\cdot i} \text{ mod } 2^p-1 \right) \text{ mod } 2^p-1  \\
+     &= \sum\limits_{i=0}^n \left( x_i \text{ mod } 2^p-1 \right) \left( \underbrace{2^p \text{ mod } 2^p-1}_1 \right)^i \text{ mod } 2^p-1 \\
+     &= \sum\limits_{i=0}^n x_i \text{ mod } 2^p-1  \\
+     &= \sum\limits_{i=0}^n y_i \text{ mod } 2^p-1  \\
+     &= h(y)
+\end{align}
+
 
 \subsection{Hashing}
 
@@ -72,6 +86,6 @@ x
 
 \subsection{Expected value}
 
-x
+
 
 \end{document}
