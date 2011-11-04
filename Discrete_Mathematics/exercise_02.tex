@@ -82,7 +82,22 @@ h(x) &= \sum\limits_{i=0}^n x_i 2^{p\cdot i} \text{ mod } 2^p-1  \\
 
 \subsection{Hashing}
 
-x
+We choose two different hash functions $h_1$ and $h_2$ and simulate hashing with chaining for random integer variables. 
+We take a fixed table size of $ p = 48049$, which is a prime number, 
+and analyze the distribution of the inserted elements in the hash table.
+Therefore we measure the maximum chain length as well as the standard deviation of the chains' lengths 
+for load factors from zero up to ten.
+The average chain length is equal to the load factor. 
+The figures show the measured values for both hash functions
+\[h_1(x) = x \text{ mod } p \qquad h_2(x) = p \left( \frac{\sqrt{5}-1}{2} x \text{ mod } 1 \right)  \]
+
+\begin{centering}
+\includegraphics[width=\textwidth] {plot}
+\end{centering}
+
+Obviously both hash functions distribute both with nearly the same quality. The maximum length is usually 
+more than twice as large as the load factor, which is the lower bound. Of course these results mainly 
+depend on the input data, which here comes from Python's random command (uniformely distributed numbers $\in \{0,.., 2^{20} \}$ )
 
 \subsection{Expected value}
 
