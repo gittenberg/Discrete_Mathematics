@@ -43,7 +43,29 @@
 
 \subsection{Skip lists}
 
-\noindent a) x\\
+\noindent a) Expected value of $h$: we use the notation from the script:
+$x\in S$, $h(x) =$ number of sets $S_i$ containing $x$, $h = 1+\max\{h(x):
+x\in S\}$. 
+
+For $k\geq 1$, we have $P(h(x) \geq k) = p^{k-1}$ and therefore 
+\[
+P(h \geq k+1) = nP(h(x) \geq k) = np^{k-1}.
+\]
+This estimate does not make sense for $k < 1 + \log_{1/p} n=1 - \log_{p} n$.
+For those values of $k$ we can use the trivial upper bound $P(h \geq k+1) \leq 
+1$. Then $E(h)$ equals:
+\begin{eqnarray}
+\sum_{k=1}^\infty P(h \geq k+1) &=& \sum_{k=1}^{\lceil - \log_{p} n \rceil} P(h
+\geq k+1)+\sum_{k=1+\lceil - \log_{p} n \rceil}^{\infty} P(h \geq k+1) 
+\leq \nonumber \\
+&\leq& 1+\lceil - \log_{p} n \rceil + \sum_{k=1+\lceil - \log_{p} n
+\rceil}^{\infty} np^{k-1}=.
+\nonumber 
+\end{eqnarray}
+
+\noindent b) Expected value of search time:\\
+
+\noindent c) Expected value of space consumption:\\
 
 
 \subsection{``Sparse'' skip list}
@@ -94,4 +116,5 @@ P(N=2)E\left(\sum_{i=1}^{2} X_i\middle| N=2\right)+
 \frac{2+2+3}{3}=\frac{13}{3}.
 \nonumber 
 \end{eqnarray}
+
 \end{document}
