@@ -43,7 +43,8 @@
 
 \subsection{Skip lists}
 
-\noindent a) Expected value of $h$: we use the notation from the script:
+\noindent a) Expected value of $h$: 
+we use the notation from the script:
 $x\in S$, $h(x) =$ number of sets $S_i$ containing $x$, $h = 1+\max\{h(x):
 x\in S\}$. 
 
@@ -65,15 +66,28 @@ For those values of $k$ we can use the trivial upper bound $P(h \geq k+1) \leq
 = \nonumber \\
 &\leq& 1+\lceil - \log_{p} n \rceil + \frac{n p^{- \log_{p} n}}{1-p} =
 \nonumber \\
-&=& 1+\lceil - \log_{p} n \rceil + \frac{1}{1-p}
+&=& 1+\lceil - \log_{p} n \rceil + \frac{1}{1-p}.
 \nonumber 
 \end{eqnarray}
 For $p=1/3$ this yields $E(h) \leq 5/2+\lceil \log_{3} n \rceil$.
 \\
 
-\noindent b) Expected value of search time:\\
+\noindent b) Expected value of space consumption:
+let M denote the total size of the sets $S_1,S_2, ... ,S_h$.
+Then $M = \sum_{x\in S} h(x)$ and by linearity of expectation:
+\begin{eqnarray}
+E(M) = \sum_{x\in S} E(h(x)) = \frac{n}{p}.
+\nonumber
+\end{eqnarray}
+We need to add the $h$ pseudo nodes at $-\infty$, so that the total size is
+\[
+E(M) + E(h) \leq \frac{n}{p} + 1+\lceil - \log_{p} n \rceil + \frac{1}{1-p}.
+\]
+For $p=1/3$ this yields $E(M) + E(h) \leq 3n + 5/2+\lceil \log_{3} n \rceil$.
+\\
 
-\noindent c) Expected value of space consumption:\\
+\noindent c) Expected value of search time:
+\\
 
 
 \subsection{``Sparse'' skip list}
