@@ -101,6 +101,25 @@ depend on the input data, which here comes from Python's random command (uniform
 
 \subsection{Expected value}
 
-
+Let $K =$ Number of probes accessing occupied slots. We want to show that
+\[
+E(K) = \sum_{i=1}^\infty P(K \geq i). 
+\]
+Proof: We note that $K \geq 0$ and by definition $E(K) < \infty$ so that it is
+permitted to rearrange the sums. It follows that
+\begin{align}
+E(K) &= \sum\limits_{i=0}^\infty i P(K=i) =  \\
+     &= 1 \cdot P(K=1) + 2 \cdot P(K=2) + 3 \cdot P(K=3) + \ldots \\
+     &= P(K=1) + \\
+     &+ P(K=2) + P(K=2) + \\
+     &+ P(K=3) + P(K=3) + P(K=3) \ldots
+\end{align}
+We rearrange this term by columns and obtain due to absolute convergence
+\begin{eqnarray}
+E(K) = P(K=1) + P(K=2)&+& P(K=3) + \ldots +\nonumber\\
+              + P(K=2)&+& P(K=3) + \ldots +\nonumber\\
+                      &+& P(K=3) + \ldots \nonumber\\
+     = q_1 + q_2 + q_3 + \ldots &=& \sum_{i=1}^\infty P(K \geq i).\square
+\end{eqnarray}
 
 \end{document}
