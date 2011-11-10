@@ -150,17 +150,72 @@ E\left(\sum_{i=1}^A(1+C_i)\right) + E(M_A) \leq \frac{13}{4} \log_{3} n +
 \]
 \\
 
+
+
+Remember that for each element in $S$ we throw a coin until $0$ comes up and count the number of coin throws which resulted in $1$. The probabilities are given with $Pr(1)= 1/3$ and therefore $Pr(0)=2/3$. The expected value of a geometric distribution is defined as $E(x)=1/p$. Which results in an expected value for $h$ of $1/(2/3) = 1.5$.
+
+
 \subsection{``Sparse'' skip list}
 
-\noindent a) x\\
+We can drop the left--ingoing edges of all nodes that have a top--ingoing edge without affecting the search algorithm.
+Searching for element 10 (which is not in the list) walks the same path as before ($-\infty, -\infty, -\infty, 2,5,5,8,8,9$). 
+The only difference is that element 9 has no further pointer, which ends the search unsuccessfully, 
+instead of pointing to 11 which also ends the search successfully.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Skiplist.pdf}
+\caption{Shown here is the skip list example from the script. The dotted red edges can be removed without affecting the search algorithm.}
+\label{fig:SkipList}
+\end{figure}
+
+As shown in the figure, the number of edges we can remove per column is the height of the column minus one. 
+Using the expected value for the height $h(x)$, we can derive he overall number of redundant edges: \[ n \cdot E(h(x)-1) =  n \left(E(h(x)) - 1 \right) = n\]
+
+Remark: We think that in practice leaving out these edges brings no advantage for the algorithm, because an element may contain only one pointer instead of two, but it nevertheless has to memorize whether this pointer is a right--pointer or a down--pointer and in case of an appropriate insertion event, the second pointer has to be added. So in fact each element has to allocate the memory for both pointers, even if one is not used.
 
 \subsection{Skip lists}
 
-\noindent a) x\\
+\paragraph{a)} First we will reconcider a part of the proof in the script:
+\begin{align}
+E(h) &= \sum\limits_{k=1}^\infty k \cdot Pr(h = k) \\
+&= \begin{array}{cccc} Pr(h=1) + & & & \\ Pr(h=2) + & Pr(h=2) + & & \\ Pr(h=3) + & Pr(h=3) + & Pr(h=3) + & \\ \vdots & & & \end{array} \\
+&= Pr(h \geq 1) +  Pr(h \geq 2) +  Pr(h \geq 3) +  \ldots  \\
+&= \sum\limits_{k=0}^\infty Pr(h \geq k+1)
+\end{align}
+
+
 
 
 \subsection{Independencies}
 
+\paragraph {a)}
+Let $\Omega_x, \Omega_y$ be the sets of elementary events of two different discrete random events 
+(e.g. a coin throw and the color in a game of Roulette). 
+Additionally, let $X: \Omega_x \to \mathbb{R}, Y: \Omega_y \to \mathbb{R}$ 
+random variables for both experiments. The expected values of those random variables are
+\[
+E(X) = \sum\limits_{x \in \Omega_x} Pr(x) \cdot X(x) \qquad  
+E(Y) = \sum\limits_{y \in \Omega_y} Pr(y) \cdot Y(y)  
+\]
+
+\begin{align}
+E(X+Y)  &= \sum\limits_{x \in \Omega_x} \sum\limits_{y \in \Omega_y} Pr(x,y) \cdot (X(x) + Y(y))    \\
+        &= \sum\limits_{x \in \Omega_x} \sum\limits_{y \in \Omega_y} Pr(x,y) X(x) + Pr(x,y) Y(y)    \\
+        &= \sum\limits_{x \in \Omega_x} X(x) \underbrace{\sum\limits_{y \in \Omega_y} Pr(x,y) }_{Pr(x)} 
+         + \sum\limits_{y \in \Omega_y} Y(y) \underbrace{\sum\limits_{x \in \Omega_x} Pr(x,y) }_{Pr(y)} \\
+        &= E(X) + E(Y)
+\end{align}
+
+\begin{align}
+E(X\cdot Y)  &= \sum\limits_{x \in \Omega_x} \sum\limits_{y \in \Omega_y} Pr(x,y) \cdot X(x) \cdot  Y(y)    \\
+             &= \sum\limits_{x \in \Omega_x} \sum\limits_{y \in \Omega_y} Pr(x)\cdot Pr(y) \cdot X(x) \cdot  Y(y)    \\
+             &= \sum\limits_{x \in \Omega_x} Pr(x)\cdot X(x)  \cdot \sum\limits_{y \in \Omega_y}  Pr(y) \cdot  Y(y)    \\
+             &= E(X) \cdot E(Y)
+\end{align}
+In (6) we use the independence of $X$ and $Y$.
+
+\paragraph {b)}
 We have
 \[
 E(X_1) = \frac{1}{9}(1+1+2+2+3+3+1+2+3) = 2,
