@@ -183,7 +183,10 @@ E(h) &= \sum\limits_{k=1}^\infty k \cdot Pr(h = k) \\
 &= Pr(h \geq 1) +  Pr(h \geq 2) +  Pr(h \geq 3) +  \ldots  \\
 &= \sum\limits_{k=0}^\infty Pr(h \geq k+1)
 \end{align}
-
+The probability that the height $h$ of a skip list is larger than $k$ is bounded by
+\[ Pr(h\geq k+1) \leq n \cdot Pr(h(x) \geq k) = n \cdot \frac{1}{2^{k-1}} \]
+So the probability that $h \geq c \cdot log\;n +1$ (so nearly $c$-times the expected value) is
+\[ n \cdot \frac{1}{2^{c \cdot log\;n-1}} = \frac{2n}{n^{c}}  = \frac{2}{n^{c-1}} \]
 
 
 
@@ -213,7 +216,7 @@ E(X\cdot Y)  &= \sum\limits_{x \in \Omega_x} \sum\limits_{y \in \Omega_y} Pr(x,y
              &= \sum\limits_{x \in \Omega_x} Pr(x)\cdot X(x)  \cdot \sum\limits_{y \in \Omega_y}  Pr(y) \cdot  Y(y)    \\
              &= E(X) \cdot E(Y)
 \end{align}
-In (6) we use the independence of $X$ and $Y$.
+In (10) we use the independence of $X$ and $Y$.
 
 \paragraph {b)}
 We have
