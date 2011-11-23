@@ -74,4 +74,40 @@ Now we analyze the structure of the tree $T$ and regard two cases:
         \end{center}
 \end{enumerate}
 
+
+\subsection{Tree decomposition}
+
+
+\subsection{Bellman-Ford}
+
+\paragraph {a)}
+\[ \begin{array}{c|ccccc}
+   & z & u & v & x & y \\
+   \hline
+k=0 & (0)_z & \infty & \infty & \infty & \infty \\
+k=1 & 0_z & 6_z & \infty & (7_z) & \infty \\
+k=2 & 0_z & 6_u & (4_x) & 7_x & 2_u \\
+k=3 & 0_z & (2_v) & 4_v & 7_x & 2_y \\
+k=4 & 0_z & 2_u & 4_v & 7_x & (-2_u) \\
+k=5 & (0_y) & 2_u & 4_v & 7_x & -2_y \\
+\hline
+\end{array} \]
+Example: the shortest path from $z$ to $z$ is $(z,x,v,u,y,z)$ with weight zero (see traceback).
+
+
+
+\paragraph {b)}
+Let $f$ be the result of the Bellman-Ford-algorithm. We'll prove equivalency between the two statements (I) and (II):
+
+\begin{description}
+\item[(I)] The graph contains a circle of negative weight reachable from $s$.
+\item[(II)] There is a node $v$ with $f_n(v) < f_{n-1}(v)$.
+
+\item[(I) $\Rightarrow$ (II)] 
+
+\end{description}
+
+
+
+
 \end{document}
