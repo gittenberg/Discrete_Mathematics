@@ -97,13 +97,35 @@ Example: the shortest path from $z$ to $z$ is $(z,x,v,u,y,z)$ with weight zero (
 
 
 \paragraph {b)}
-Let $f$ be the result of the Bellman-Ford-algorithm. We'll prove equivalency between the two statements (I) and (II):
+Let $f$ be the result of the Bellman-Ford-algorithm started in node $s$. We'll prove equivalency between the two statements (I) and (II):
 
 \begin{description}
 \item[(I)] The graph contains a circle of negative weight reachable from $s$.
 \item[(II)] There is a node $v$ with $f_n(v) < f_{n-1}(v)$.
 
+\item[(II) $\Rightarrow$ (I)] 
+Let $v \neq s$ be the node for which we have $f_n(v) < f_{n-1}(v)$. 
+By definition, $f_{n-1}(v)$ computed already the shortest walk $\pi^*$ 
+from $s$ to $v$ using at most $n-1$ arcs. We say walk, because ensuring 
+$\pi^*$ to be a path would require the graph not to contain negative circles.
+But we consider $\pi^*$ to be a proper path, since if it was not we would
+already have shown the implication.
+
+So we assume $\pi^*$ is the shortest of all paths from $s$ to $v$, considering every 
+possible path (since up to $n-1$ arcs suffice to cover every path). 
+If $f_{n}(v) < l(\pi^*)$ then there is a new walk $\pi°$ that uses exactly $n$ 
+arcs (if it used at most $n-1$ arcs, it would have been found in $f_{n-1})$.
+A walk of $n$ arcs must contain a cycle $C$. And it contains a path from $s$ to $v$. 
+Now the weight $l(\pi°)$ is made up of the 
+weight of this cylce $C$ plus the weight of the path $\pi$ from $s$ to $v$ that is contained 
+in $\pi°$ (Note that this decomposition need not be edge disjoint, but the edges that belong 
+to the circle and the path at the same time are walked twice during $\pi°$, 
+so the the addition of the lengths holds).    Now we have
+\[ l(\pi°) < l(\pi*) \Rightarrow l(\pi°) < l(\pi) \Rightarrow l(\pi) + l(C) < l(\pi) \Rightarrow l(C) < 0 \]
+
+
 \item[(I) $\Rightarrow$ (II)] 
+
 
 \end{description}
 
