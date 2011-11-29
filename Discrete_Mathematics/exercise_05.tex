@@ -43,8 +43,8 @@
 
 \subsection{Tree decomposition}
 
-Let $G=(V,E)$ be a graph with $V= {v_1 , \ldots, v_n}$ and $E = {V \choose 2}$. 
-We'll prove that the graph's tree width is $n-1$, meaning that any tree decomposition of $G$ 
+Let $G=(V,E)$ be a graph with $V= \{v_1 , \ldots, v_n\}$ and $E = {V \choose
+2}$. We'll prove that the graph's tree width is $n-1$, meaning that any tree decomposition of $G$ 
 contains at least one piece with $n$ elements.
 
 \paragraph{Proof:} 
@@ -123,9 +123,32 @@ to the circle and the path at the same time are walked twice during $\pi°$,
 so the the addition of the lengths holds).    Now we have
 \[ l(\pi°) < l(\pi*) \Rightarrow l(\pi°) < l(\pi) \Rightarrow l(\pi) + l(C) < l(\pi) \Rightarrow l(C) < 0 \]
 
+\item[$\neg$(II) $\Rightarrow$ $\neg$(I)]
+Now let us assume that there is no $v \in V$ such that $f_n(v) \neq f_{n-1}(v)$. Because trivially $f_n(v) \leq f_{n-1}(v)$,
+this can only hold if $f_n(v) = f_{n-1}(v)$ $\forall v \in V$. 
+However, as shown in the lecture,
+\[
+f_n(v) = \min (f_{n-1}(v), \min_{(u,v)\in A} (f_{n-1}(u)+l(u,v))).
+\]
+The second argument of the wrapping min function can therefore be not smaller than the first:
+\[
+f_{n-1}(v) \leq \min_{(u,v)\in A} (f_{n-1}(u)+l(u,v)) \hspace{3ex} \forall v \in V,
+\]
+or equivalently
+\[
+f_{n-1}(v) \leq f_{n-1}(u)+l(u,v) \hspace{3ex} \forall v \in V, (u,v)\in A.
+\]
 
-\item[(I) $\Rightarrow$ (II)] 
-
+Now let $C$ be a cycle in the graph with $k$ different vertices $v_1, ..., v_k=v_0, v_{k+1}=v_1$. 
+According to the previous inequality,
+\[
+f_{n-1}(v_i) \leq f_{n-1}(v_{i-1})+l(v_{i-1},v_i)
+\]
+is true for all $i$. Summing this inequality from $i=1$ to $k$, we obtain
+\[
+0 \leq \sum_{i=1}^k l(v_{i-1},v_i) = l(C).
+\]
+Since $C$ was any cycle in the graph, there are no negative cycles and our assertion follows.
 
 \end{description}
 
