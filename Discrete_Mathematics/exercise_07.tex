@@ -1,0 +1,130 @@
+% Koma class
+\documentclass[a4paper, oneside]{scrartcl}   
+
+\usepackage{a4wide}
+
+%------------------
+% language = english
+\usepackage[english, german]{babel}	% Umlaute mit \"u
+\usepackage[latin1]{inputenc}
+
+% margins + Kopf- und Fuﬂzeilen
+\usepackage[left = 2.5cm, right = 2.5cm, top = 2cm, bottom = 3cm]{geometry}
+\usepackage{scrpage2} 
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\rehead{\headmark}
+\lehead{\pagemark}
+\lohead{\headmark}
+\rohead{\pagemark} 
+
+
+% math
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% figures
+\usepackage{tikz}
+\usepackage{graphicx}
+
+
+% section-Zaehler wird neu gesetzt:
+\setcounter{section}{3}
+%------------------
+\author{Sascha Meiers, Martin Seeger}
+\title{Exercise 7, Discrete Mathematics for Bioinformatics}
+\date{Winter term 2011/2012}
+
+
+\begin{document}
+\maketitle
+
+%---------------------------------------------------------------------------------------------------
+
+\subsection{Network Flow (Niveau II)}
+
+
+\subsection{Network Flow (Niveau I)}
+Replace each node $v$ with its associated \emph{node capacity} $c_v$ by two new nodes 
+$v_{in}, v_{out}$ and an edge $(v_{in},v_{out})$ with \emph{edge capacity} $c_v$. Then all ingoing 
+edges $(u,v) \in E$ point to $v_{in}$, the outgoing edges $(v,u) \in E$ start from $v_{out}$.   
+
+
+\subsection{Bellman-Ford}
+
+\paragraph {a)}
+\[ \begin{array}{c|ccccc}
+   & z & u & v & x & y \\
+   \hline
+k=0 & (0)_z & \infty & \infty & \infty & \infty \\
+k=1 & 0_z & 6_z & \infty & (7_z) & \infty \\
+k=2 & 0_z & 6_u & (4_x) & 7_x & 2_u \\
+k=3 & 0_z & (2_v) & 4_v & 7_x & 2_y \\
+k=4 & 0_z & 2_u & 4_v & 7_x & (-2_u) \\
+k=5 & (0_y) & 2_u & 4_v & 7_x & -2_y \\
+\hline
+\end{array} \]
+Example: the shortest path from $z$ to $z$ is $(z,x,v,u,y,z)$ with weight zero (see traceback).
+
+
+
+\paragraph {b)}
+Let $f$ be the result of the Bellman-Ford-algorithm started in node $s$. We'll prove equivalency between the two statements (I) and (II):
+
+\begin{description}
+\item[(I)] The graph contains a circle of negative weight reachable from $s$.
+\item[(II)] There is a node $v$ with $f_n(v) < f_{n-1}(v)$.
+
+\item[(II) $\Rightarrow$ (I)] 
+Let $v \neq s$ be the node for which we have $f_n(v) < f_{n-1}(v)$. 
+By definition, $f_{n-1}(v)$ computed already the shortest walk $\pi^*$ 
+from $s$ to $v$ using at most $n-1$ arcs. We say walk, because ensuring 
+$\pi^*$ to be a path would require the graph not to contain negative circles.
+But we consider $\pi^*$ to be a proper path, since if it was not we would
+already have shown the implication.
+
+So we assume $\pi^*$ is the shortest of all paths from $s$ to $v$, considering every 
+possible path (since up to $n-1$ arcs suffice to cover every path). 
+If $f_{n}(v) < l(\pi^*)$ then there is a new walk $\pi∞$ that uses exactly $n$ 
+arcs (if it used at most $n-1$ arcs, it would have been found in $f_{n-1})$.
+A walk of $n$ arcs must contain a cycle $C$. And it contains a path from $s$ to $v$. 
+Now the weight $l(\pi∞)$ is made up of the 
+weight of this cylce $C$ plus the weight of the path $\pi$ from $s$ to $v$ that is contained 
+in $\pi∞$ (Note that this decomposition need not be edge disjoint, but the edges that belong 
+to the circle and the path at the same time are walked twice during $\pi∞$, 
+so the the addition of the lengths holds).    Now we have
+\[ l(\pi∞) < l(\pi*) \Rightarrow l(\pi∞) < l(\pi) \Rightarrow l(\pi) + l(C) < l(\pi) \Rightarrow l(C) < 0 \]
+
+\item[$\neg$(II) $\Rightarrow$ $\neg$(I)]
+Now let us assume that there is no $v \in V$ such that $f_n(v) \neq f_{n-1}(v)$. Because trivially $f_n(v) \leq f_{n-1}(v)$,
+this can only hold if $f_n(v) = f_{n-1}(v)$ $\forall v \in V$. 
+However, as shown in the lecture,
+\[
+f_n(v) = \min (f_{n-1}(v), \min_{(u,v)\in A} (f_{n-1}(u)+l(u,v))).
+\]
+The second argument of the wrapping min function can therefore be not smaller than the first:
+\[
+f_{n-1}(v) \leq \min_{(u,v)\in A} (f_{n-1}(u)+l(u,v)) \hspace{3ex} \forall v \in V,
+\]
+or equivalently
+\[
+f_{n-1}(v) \leq f_{n-1}(u)+l(u,v) \hspace{3ex} \forall v \in V, (u,v)\in A.
+\]
+
+Now let $C$ be a cycle in the graph with $k$ different vertices $v_1, ..., v_k=v_0, v_{k+1}=v_1$. 
+According to the previous inequality,
+\[
+f_{n-1}(v_i) \leq f_{n-1}(v_{i-1})+l(v_{i-1},v_i)
+\]
+is true for all $i$. Summing this inequality from $i=1$ to $k$, we obtain
+\[
+0 \leq \sum_{i=1}^k l(v_{i-1},v_i) = l(C).
+\]
+Since $C$ was any cycle in the graph, there are no negative cycles and our assertion follows.
+
+\end{description}
+
+
+
+
+\end{document}
