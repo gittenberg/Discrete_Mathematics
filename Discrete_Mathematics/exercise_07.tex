@@ -29,7 +29,7 @@
 
 
 % section-Zaehler wird neu gesetzt:
-\setcounter{section}{3}
+\setcounter{section}{7}
 %------------------
 \author{Sascha Meiers, Martin Seeger}
 \title{Exercise 7, Discrete Mathematics for Bioinformatics}
@@ -43,6 +43,35 @@
 
 \subsection{Network Flow (Niveau II)}
 
+\begin{description}
+\item[a) $\Rightarrow$ b)] This is the same as the Theorem on pp. 5006-5007
+in the lecture since the existence of an augmenting path is equivalent to
+the reachability of $t$ from $s$ in the residual network $G_f$. If there is such
+a path then $f$ is not a maximum.
+\item[b) $\Rightarrow$ c)] Assume there is no augmenting path in $G_f$ from $s$
+to $t$. Let 
+\[
+S = \{ v \in V | \exists\  \mathrm{path}\  s \leadsto t\  \mathrm{in}\  G_f\},
+\ T = V \backslash S.
+\]
+Then $(S, T)$ is a cut because $s \in S$ and $T \notin S$. \\
+It is easy to see that this cut is saturated by $f$: pick $(u, v) \in S\times
+T$. If $(u, v) \in E$, hence $(u, v) \in E \cap S\times
+T$ then if $f(u, v) < \mathrm{cap}(u, v)$, $v$ would become reachable from $u$
+and hence also from $s$. Therefore $f(u, v) = \mathrm{cap}(u, v)$.
+On the other hand, assume $(v, u) \in E$, i.e. $(u, v) \in E \cap T\times
+S$. Then if $f(u, v) > 0$, we would have $v \in S$ which means that really $f(u,
+v) = 0$. Therefore $f$ saturates $(S, T)$. By the Lemma on p. 5006, $\mathrm{val}(f) =
+\mathrm{cap}(S, T)$.
+\item[c) $\Rightarrow$ a)] We have by the Lemma on p. 5006 that for any flow $f$
+and cut $(S, T)$
+\[
+\mathrm{val}(f) \leq  \mathrm{cap}(S, T).
+\]
+Therefore a flow which saturates this inequality must be maximal.
+\end{description}
+In summary, we have given an construction for a minimum cut that satisfies the
+Max-Flow Min-Cut Theorem given a maximum flow resp. its residual network.
 
 \subsection{Network Flow (Niveau I)}
 Replace each node $v$ with its associated \emph{node capacity} $c_v$ by two new nodes 
