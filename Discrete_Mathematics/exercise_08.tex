@@ -7,6 +7,7 @@
 % language = english
 \usepackage[english, german]{babel}	% Umlaute mit \"u
 \usepackage[latin1]{inputenc}
+\usepackage{enumitem}
 
 % margins + Kopf- und Fuﬂzeilen
 \usepackage[left = 2.5cm, right = 2.5cm, top = 2cm, bottom = 3cm]{geometry}
@@ -18,7 +19,6 @@
 \lohead{\headmark}
 \rohead{\pagemark} 
 
-
 % math
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -26,7 +26,6 @@
 % figures
 \usepackage{tikz}
 \usepackage{graphicx}
-
 
 % section-Zaehler wird neu gesetzt:
 \setcounter{section}{8}
@@ -97,7 +96,27 @@ x
 
 \subsection{Linear Optimization}
 
-x
+\begin{enumerate}[label={\alph*)}]
+  \item For $c^T = (-1, -1)$ we have to maximize $-x_1-x_2$, i.e. minimize
+  $x_1+x_2$.\\
+  In the feasible region, this is the case for $(x_1, x_2) = (0, 0)$.
+  \item For $c^T = (0, -1)$ we have to maximize $-x_2$, i.e. minimize
+  $x_2$.\\ 
+  In the feasible region, this is the case for $(x_1, x_2) = (\lambda, 0)$,
+  $\lambda \in [0, 1]$.
+  \item For $c^T = (-1, 0)$ we have to maximize $-x_1$, i.e. minimize
+  $x_1$.\\ 
+  In the feasible region, this is the case for $(x_1, x_2) = (0, \lambda)$,
+  $\lambda \in [0, \infty [$.
+  \item For $c^T = (1, 1)$ we have to maximize $x_1+x_2$.\\
+  Since e.g. the half-line $x_1-x_2=0$, $x_1, x_2 \geq 0$ lies in the feasible
+  region, and as the target function increases strictly along this half-line,
+  there is no optimal solution.
+\end{enumerate} 
+If the following constraint is added, the problem becomes infeasible:
+\[
+x_1-x_2 \geq 2.
+\]
 
 \subsection{Profit Optimization}
 
