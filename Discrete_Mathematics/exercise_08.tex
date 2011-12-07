@@ -43,7 +43,53 @@
 
 \subsection{Linear Optimization}
 
-x
+\begin{equation}
+2x_1+3x_2 = \min \Leftrightarrow -2x_1-3x_2 = \max .
+\end{equation}
+\begin{equation}\label{1}
+3x_1+6x_2\leq 7 \Leftrightarrow 3x_1+6x_2+x_3=7,\ x_3\geq 0.
+\end{equation}
+\[
+x_1\  \mathrm{free} \Leftrightarrow x_1 = x_4-x_5,\ x_4\geq 0,\ x_5\geq 0.
+\]
+Insert the previous equation into \eqref{1}:
+\[
+6x_2+x_3+3x_4-3x_5=7,\ x_3\geq 0,\ x_4\geq 0,\ x_5\geq 0.
+\]
+Finally,
+\[
+2x_1 + 2x_2 = 5 \Leftrightarrow 2x_2 + 2x_4 - 2x_5= 5, 
+\]
+\[
+-2x_1-3x_2 = -3x_2-2x_4+2x_5 = \max .
+\]
+Summarizing,
+\[
+\max \left\{(-3,0,-2,2) 
+\left(
+ \begin{smallmatrix}
+  x_2\\x_3\\x_4\\x_5
+ \end{smallmatrix}
+\right)
+\middle| 
+\begin{pmatrix}
+ 6 & 1 & 3 & -3\\
+ 2 & 0 & 2 & -2
+\end{pmatrix}
+\left(
+ \begin{smallmatrix}
+  x_2\\x_3\\x_4\\x_5
+ \end{smallmatrix}\right) =
+ \begin{pmatrix}
+  7\\5
+ \end{pmatrix},
+\left(
+ \begin{smallmatrix}
+  x_2\\x_3\\x_4\\x_5
+ \end{smallmatrix} \right)
+ \geq 0
+\right\}.
+\]
 
 \subsection{Linear Optimization}
 
