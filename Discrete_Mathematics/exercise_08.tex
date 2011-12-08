@@ -92,7 +92,13 @@ Summarizing,
 
 \subsection{Linear Optimization}
 
-x
+The feasible region is shown in the inequality plot below. 
+The red arrow is the vector of the first optimization function, the blue arrow the one belonging to the second one.
+Both optimization goals are maximized in the vertex labeled with the check mark.
+
+\begin{center}
+\includegraphics[width=8cm]{inequalplot.png}
+\end{center}
 
 \subsection{Linear Optimization}
 
@@ -120,6 +126,21 @@ x_1-x_2 \geq 2.
 
 \subsection{Profit Optimization}
 
-x
+The linear program contains six inequalities:
+\[ \text{max} \{
+\left( \begin{array}{cc} 20 & 25 \end{array}\right)  \cdot \left( \begin{array}{c} A \\ B \end{array}\right) 
+ \quad | \quad
+\left( \begin{array}{cc} 1 & 0\\ -1 & 0\\ 0 & 1 \\ 0 & -1 \\ 1 & -2 \\ 1 & 2 \end{array}\right) 
+\cdot
+\left( \begin{array}{c} A \\ B \end{array}\right) 
+\leq
+\left( \begin{array}{c} 60\\ 0\\ 50 \\ 0 \\ 0 \\ 120 \end{array}\right) 
+\} \]
 
+Again, we solve it graphically, leading to the optimal solution of \$1950 profit per day.
+It is reached with a daily production of $A=60$ and $B=30$ refrigerator units.
+
+\begin{center}
+\includegraphics[width=8cm]{inequalplot4.png}
+\end{center}
 \end{document}
