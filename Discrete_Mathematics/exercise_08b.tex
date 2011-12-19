@@ -200,7 +200,24 @@ $I = \{2,4\}$: $x = (0,0)$.
 
 \subsection{Simplex Algorithm}
 
-x
+\begin{enumerate}
+\item Let $x_1 =$ volume of coke, and $x_2 =$ volume of beer. Then we have
+\[
+\mathrm{profit} = u^T x = x_1 + 2 x_2 = \mathrm{max!},
+\]
+\[
+\mathrm{weight} = x_1 + 1.5 x_2 \leq 150,
+\]
+\[
+\mathrm{beer\ availability} = x_2 \leq 35,
+\]
+\[
+\mathrm{maximum\ alcoholic\ volume} = (x_1+x_2)\cdot 2/3 \geq x_2
+\Longleftrightarrow  -2 x_1 + x_2 \leq 0.
+\]
+$A$ and $b$ can simply be read off.
+\item Simplex algorithm: see handwritten sheet.
+\end{enumerate}
 
 \subsection{Duality}
 
