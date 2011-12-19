@@ -213,7 +213,10 @@ $I = \{2,4\}$: $x = (0,0)$.
 \]
 \[
 \mathrm{maximum\ alcoholic\ volume} = (x_1+x_2)\cdot 2/3 \geq x_2
-\Longleftrightarrow  -2 x_1 + x_2 \leq 0.
+\Leftrightarrow  -2 x_1 + x_2 \leq 0,
+\]
+\[
+-x_1, -x_2 \leq 0.
 \]
 $A$ and $b$ can simply be read off.
 \item Simplex algorithm: see handwritten sheet.
@@ -221,6 +224,47 @@ $A$ and $b$ can simply be read off.
 
 \subsection{Duality}
 
-x
+\begin{enumerate}
+  \item By reducing the inequalities we obtain
+\[
+24 x_1 + 36 x_2 + 18 x_3 \leq 360 \Leftrightarrow 4 x_1 + 6 x_2 + 3 x_3 \leq 60,
+\]
+\[
+12\cdot 6 x_1 + 12\cdot 6 x_2 + 12\cdot 2 x_3 \leq 48\Leftrightarrow 3
+x_1 + 3 x_2 + x_3 \leq 2,
+\]
+\[
+3 x_1 + 4 x_2 + 2 x_3 = \mathrm{max!}.
+\]
+(The second inequality holds because there are 12 acres of land.)
+\item Dual problem:
+\[
+60 u_1 + 2 u_2 = \mathrm{min!},
+\]
+\[
+u_1, u_2 \geq 0,
+\]
+\[
+\begin{pmatrix}
+4 & 3\\
+6 & 3\\
+3 & 1
+\end{pmatrix} 
+\begin{pmatrix}
+u_1\\
+u_2
+\end{pmatrix} =
+\begin{pmatrix}
+3 \\ 4 \\ 2
+\end{pmatrix}.
+\]
+Economic interpretation: minimize the total production cost, while proceeds on
+potatoes $\geq 3$, proceeds on
+corn $\geq 4$, proceeds on
+wheat $\geq 2$, with non-negative prices. 
+\item Original problem: profit $= 4$, $(x_1, x_2, x_3) = (0, 0, 2)$.
+Dual problem: cost $= 4$, $(u_1, u_2) = (0, 2)$.
+Same optimal values.
+\end{enumerate}
 
 \end{document}
