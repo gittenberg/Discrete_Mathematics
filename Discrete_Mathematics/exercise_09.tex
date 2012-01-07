@@ -58,10 +58,45 @@ x4                            0.5
 \end{verbatim}
 
   \item 
+Input file:
+\begin{verbatim}
+DIM = 4
+
+LOWER_BOUNDS
+0 0 0 0
+UPPER_BOUNDS
+??? hier komm ich nicht weiter
+
+END
+\end{verbatim}
+Output file:
+\begin{verbatim}
+DIM =  4
+
+CONV_SECTION
+???
+
+END
+\end{verbatim}
+\item 
 \end{enumerate}
 
 \subsection{Branch and Bound}
 
-x
+\begin{enumerate}
+  \item 
+\begin{verbatim}
+$ lp_solve example2.lp 
+
+Value of objective function: 22.4
+
+Actual values of the variables:
+x1                            2.8
+x2                              0
+x3                              0
+x4                              0
+\end{verbatim}
+\end{enumerate}
+  \item 
 
 \end{document}
