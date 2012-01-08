@@ -86,7 +86,7 @@ END
 \begin{enumerate}
   \item 
 \begin{verbatim}
-$ lp_solve example2.lp 
+$ lp_solve -S3 example2.lp 
 
 Value of objective function: 22.4
 
@@ -95,8 +95,79 @@ x1                            2.8
 x2                              0
 x3                              0
 x4                              0
+
+Actual values of the constraints:
+c1                             14
 \end{verbatim}
-\end{enumerate}
   \item 
+Let us call the original problem $P_0$.
+We branch the problem into two problems: $P_{11} = P_0 \wedge x_1 \leq 2$ and
+$P_{12} = P_0 \wedge x_1 \geq 3$. 
+
+Result of solving $P_{11}$:
+\begin{verbatim}
+$ lp_solve -S3 example21.lp 
+
+Value of objective function: 22.2857
+
+Actual values of the variables:
+x1                              2
+x2                       0.571429
+x3                              0
+x4                              0
+
+Actual values of the constraints:
+c1                             14
+c2                              2
+\end{verbatim}
+
+Result of solving $P_{12}$:
+\begin{verbatim}
+$ lp_solve -S3 example22.lp 
+This problem is infeasible
+\end{verbatim}
+
+Hence, we branch further into $P_{21} = P_{11} \wedge x_2 \leq 0$ and $P_{22} =
+P_{11} \wedge x_2 \geq 1$.
+
+Result of solving $P_{21}$:
+\begin{verbatim}
+$ lp_solve -S3 example221.lp 
+
+Value of objective function: 22
+
+Actual values of the variables:
+x1                              2
+x2                              0
+x3                              1
+x4                              0
+
+Actual values of the constraints:
+c1                             14
+c2                              2
+c3                              0
+\end{verbatim}
+
+Result of solving $P_{22}$:
+\begin{verbatim}
+$ lp_solve -S3 example222.lp 
+
+Value of objective function: 22.2
+
+Actual values of the variables:
+x1                            1.4
+x2                              1
+x3                              0
+x4                              0
+
+Actual values of the constraints:
+c1                             14
+c2                            1.4
+c3                              1
+\end{verbatim}
+
+Since $22 = \lfloor 22.4 \rfloor$, and the solutions of $P_{21}$ are integers,
+this is the solution of the branch and bound ILP algorithm.
+\end{enumerate}
 
 \end{document}
