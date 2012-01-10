@@ -42,7 +42,41 @@
 
 \subsection{Critical Mixed Cycles}
 
-x
+To be shown:
+\[
+T \subseteq E \textrm{ trace} \Longleftrightarrow \nexists \textrm{ critical
+mixed cycle in } G' = (V, T, H)
+\]
+
+$\Rightarrow$: If $T$ is a trace then it corresponds to an alignment. In this
+alignment, all edges in $T$ connect vertices in the same column and all arcs in
+$H$ connect adjacent vertices in the same row in ascending order. Hence, along
+an edge, the position index of the alignment stays always constant and along an
+arc the position index of the alignment always increases. The cycle can
+therefore never be closed.
+
+$\Leftarrow$: Let us assume that $G'$ contains a mixed cycle $Z$ which is not
+critical. Pick the smallest such cycle. By definition, there is one row $a^p$ in
+the extended alignment graph for which $Z \cap a^p$ is non-consecutive. Call
+$a^p_{i_0}$ the element in this row with highest position. Now cycle through $Z$
+until you return to $Z \cap a^p$. 
+If the return position is $a^p_{i_0}$ then
+(because there must be other $a^p_i \in $ $Z \cap a^p$) we found a subcycle of $Z$ which
+contradicts the choice of $Z$ as the smallest subcycle.
+If the return position is $a^p_{i_1} \neq a^p_{i_0}$ then construct a cycle $Z' =
+[a^p_{i_0} \ldots a^p_{i_1}] \cup [a^p_{i_1} \ldots a^p_{i_0}]$ where the second
+component consists only of directed edges on $a^p$. Also $Z'$ is smaller than
+$Z$, leading to a contradiction.
+Therefore any mixed cycle in $G'$ must be critical. Inversely, no critical mixed
+cycle means no cycle at all. 
+
+Let us assume this is the case and construct an
+alignment. We now consider the connected components $\{T_1,\ldots,T_n\}$ of
+$(V, T)$. Let us connect $T_i$ and $T_j$ if any two of their elements are
+connected in $H$. The resulting object is acyclic as it inherits the
+acyclicality from $G'$. Hence we can topologically order it and thus induce a
+strict partial order. This, according to the theorem by John Kececioglu, is
+equvalent to $T$ realizing an alignment.$\square$
 
 \subsection{Branch and Cut}
 
