@@ -83,15 +83,102 @@ equvalent to $T$ realizing an alignment.$\square$
 \renewcommand{\labelenumi}{\alph{enumi})}
 \begin{enumerate}
   \item 
-x
+  Here you see the alignment graph $G=(V,E,H)$ (with only the 1-weighted edges drawn), 
+  the conflict graph and the pair graph $PG(K_{p,q})$ for the two sequences $P$ and $Q$.
+  
+  \includegraphics[width=6cm]{ex9_align_graph.pdf}
+  \includegraphics[width=4cm]{ex9_conflict_graph.pdf}
+  \includegraphics[width=4cm]{ex9_pair_graph.pdf}
+
+  \item
+  We start solving the LP relaxation of the problem without mixed cycle constraints:
+  \begin{verbatim}
+MAX x1 + x2 + x3 + x4 + x5  +x6 + x7 + x8
+
+SUBJECT TO
+A1:    - x1                                    <= 0
+A2:         - x2                               <= 0
+A3:              - x3                          <= 0
+A4:                   - x4                     <= 0
+A5:                        - x5                <= 0
+A6:                             - x6           <= 0
+A7:                                  - x7      <= 0
+A8:                                       - x8 <= 0
+B1:    + x1                                    <= 1
+B2:         + x2                               <= 1
+B3:              + x3                          <= 1
+B4:                   + x4                     <= 1
+B5:                        + x5                <= 1
+B6:                             + x6           <= 1
+B7:                                  + x7      <= 1
+B8:                                       + x8 <= 1  
+  \end{verbatim}
+  \begin{enumerate}
+    \item optimal value $8$, $(1,1,1,1,1,1,1,1)$ \\ 
+          heaviest source-to-sink path: $4 > 1$ \\
+          Adding inequality \texttt{x2 + x4 + x6 + x7 <= 1}
+    \item optimal value $5$, $(1,0,1,0,1,0,1,1)$ \\ 
+          heaviest source-to-sink path: $3 > 1$ \\
+          Adding inequality \texttt{x1 + x2 + x3 + x5 <= 1}
+    \item optimal value $3$, $(1,0,0,0,0,0,1,1)$ \\ 
+          heaviest source-to-sink path: $2 > 1$ \\
+          Adding inequality \texttt{x7 + x8 <= 1}
+    \item optimal value $3$, $(1,0,0,0,0,1,0,1)$ \\ 
+          heaviest source-to-sink path: $1 \leq 1$ \\
+          integral solution $\Rightarrow$ done
+  \end{enumerate}
 \end{enumerate}
 
 \subsection{Branch and Cut}
 
 \renewcommand{\labelenumi}{\alph{enumi})}
 \begin{enumerate}
-  \item 
-x
+  \item Again we start solving the LP relaxation of the problem without mixed cycle constraints:
+  
+  \includegraphics[width=6cm]{ex9_align_graph_task3.pdf}
+  
+  \begin{verbatim}
+MAX x1 + x2 + x3 + x4
+
+SUBJECT TO
+A1:    - x1                <= 0
+A2:         - x2           <= 0
+A3:              - x3      <= 0
+A4:                   - x4 <= 0
+B1:    + x1                <= 1
+B2:         + x2           <= 1
+B3:              + x3      <= 1
+B4:                   + x4 <= 1
+  \end{verbatim}
+  \begin{enumerate}
+    \item optimal value $4$, $(1,1,1,1)$ \\ 
+          shortest path from any node $x_i$ to $x_{i-1}$: $(x_2^3, x_1^3)$ with length 0 \\
+          Adding inequality \texttt{x1 + x4 <= 1}
+    \item optimal value $3$, $(1,1,1,0)$ \\ 
+          shortest path from any node $x_i$ to $x_{i-1}$: $(x_4^3, x_3^3)$ with length 0 \\
+          Adding inequality \texttt{x1 + x2 + x3 <= 2}
+    \item optimal value $3$, $(0,1,1,1)$ \\ 
+          shortest path from any node $x_i$ to $x_{i-1}$: $(x_4^3, x_3^3)$ with length 0 \\
+          Adding inequality \texttt{x2 + x3 + x4 <= 2}
+    \item optimal value $2.5$, $(0.5,1,0.5,0.5)$ \\ 
+          shortest path from any node $x_i$ to $x_{i-1}$: $(x_3^3, x_2^3)$ with length 1 \\
+          Could not find a solution!
+  \end{enumerate}
+  
+  \item \textbf{Branching}\\
+        It is not difficult to find a feasible solution with value $2$, choosing $x_2$ and $x_3$
+        (\emph{global lower bound}). The current \emph{local upper bound} is $2.5$.
+        
+        First branch: $x1 = 0 \Rightarrow$ optimal value $2$, solution $(0,1,0,1) \Rightarrow$ done!
+        
+        (need no further branch)
+  
+  \item Adding the constraint \texttt{x1 + x2 + x3 + x4 <= 2} to the inequalities from part (a) 
+        directly leads to a solution with optimal value $2$ and chosen edges $x_1$ and $x_2$
+  
+  \item Proof:
+
+
 \end{enumerate}
 
 \end{document}
