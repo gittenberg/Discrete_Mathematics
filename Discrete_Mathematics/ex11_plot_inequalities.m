@@ -2,15 +2,20 @@ close all
 
 plotregion([3 -4; 1 -1; 6 2; -6 -1],
 		   [-6; -2; 3; -15],
-		   [0 0], [], 'm', 0.3);
+		   [0 0], [], 'm', 0.1);
 hold on
 plot([2, -2.5], [3, 0])
-gr = 0:1:5
-cardprod(gr, gr)
+for x = 0:5
+	for y = 0:5
+		plot(x, y, 'r+')
+	endfor
+endfor
 
 axis equal
 
-%test
+print("ex11_1_a_1.png")
+replot;
+
 
 %function plotregion(A,b,lb,ub,c,transp,points,linetyp,start_end)
 % The function plotregion plots closed convex regions in 2D/3D. The region
@@ -35,4 +40,3 @@ axis equal
 %           Default is 'k-'.
 % start_end - (optional) If a special marking for the first and last point
 %              is needed.
-%
