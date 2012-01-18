@@ -10,6 +10,8 @@ cardprod(gr, gr)
 
 axis equal
 
+%test
+
 %function plotregion(A,b,lb,ub,c,transp,points,linetyp,start_end)
 % The function plotregion plots closed convex regions in 2D/3D. The region
 % is formed by the matrix A and the vectors lb and ub such that Ax>=b
