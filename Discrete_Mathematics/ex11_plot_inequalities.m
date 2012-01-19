@@ -1,10 +1,13 @@
+% Exercises 11
+% 1.a)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 close all
 
 plotregion([3 -4; 1 -1; 6 2; -6 -1],
 		   [-6; -2; 3; -15],
 		   [0 0], [], 'm', 0.1);
 hold on
-plot([2, -2.5], [3, 0])
+plot([2, 0], [3, 5/3])
 for x = 0:5
 	for y = 0:5
 		plot(x, y, 'r+')
@@ -13,30 +16,41 @@ endfor
 
 axis equal
 
-print("ex11_1_a_1.png")
-replot;
+print("ex11_1_a.png")
+hold off
+close
 
+% 1.b)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+plotregion([1 -1; 6 2; -6 -1],
+		   [-2; 3; -15],
+		   [0 0], [], 'm', 0.1);
+hold on
+#plot([2, 0], [3, 5/3])
+for x = 0:5
+	for y = 0:5
+		plot(x, y, 'r+')
+	endfor
+endfor
 
-%function plotregion(A,b,lb,ub,c,transp,points,linetyp,start_end)
-% The function plotregion plots closed convex regions in 2D/3D. The region
-% is formed by the matrix A and the vectors lb and ub such that Ax>=b
-% and lb<=x<=ub, where the region is the set of all feasible x (in R^2 or R^3).
-% An option is to plot points in the same plot.
-%
-% Usage:   plotregion(A,b,lb,ub,c,transp,points,linetyp,start_end)
-%
-% Input:
-%
-% A - matrix. Set A to [] if no A exists
-% b - vector. Set b to [] if no b exists
-% lb - (optional) vector. Set lb to [] if no lb exists
-% ub - (optional) vector. Set ub to [] if no ub exists
-% c - (optional) color, example 'r' or [0.2 0.1 0.8], {'r','y','b'}.
-%       Default is a random colour.
-% transp - (optional) is a measure of how transparent the
-%           region will be. Must be between 0 and 1. Default is 0.5.
-% points - (optional) points in matrix form. (See example)
-% linetyp - (optional) How the points will be marked.
-%           Default is 'k-'.
-% start_end - (optional) If a special marking for the first and last point
-%              is needed.
+axis equal
+
+print("ex11_1_b.png")
+hold off
+close
+
+% feasible points for relaxed ILP:
+X = [1 0; 2 0; 1 1; 2 1; 0 2; 1 2; 2 2; 1 3; 2 3];
+
+% 1.c)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+f = @(p, x, y) 2*x-3*y+p*(-6-3*x+4*y);
+
+p = 0.25:0.25:1.25
+for n=1:length(X)
+	plot(p, f(p, X(n, 1), X(n, 2)))
+	hold on
+endfor
+print("ex11_1_c.png")
+hold off
+close
