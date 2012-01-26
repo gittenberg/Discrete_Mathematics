@@ -62,10 +62,60 @@ We find that $Z_D = Z_{IP} = Z_{LP} = -5$.
 
 \subsection{Lagrangean Relaxation II}
 
-x
+We have 
+\begin{align}
+Z_{IP} &= \text{min } \{ c^T x \; | \; Ax \geq b, \; Dx \geq d\} \\
+Z(\lambda) &= \text{min } \{ c^T x + \lambda^T (b-Ax) \; | \; Dx \geq d\}
+\end{align}
+and can derive
+\[ Z_{IP} \geq \text{min } \{ c^T x + \lambda^T (b-Ax) \; | \; Ax \geq b, \; Dx \geq d\} =: Z_{+} \]
+because
+\[b-Ax \leq 0  \text{ and } \lambda \geq 0. \]
+Finally we have 
+\[Z_{+} \geq Z(\lambda) \]
+since 
+\[ \{x \; | \; Ax\geq b, \; Dx \geq d\} \subseteq \{x \; | \; Dx\geq d\} \]
 
 \subsection{Structural alignment}
 
-x
+\noindent \textbf{Proof: The polytope is full-dimensional}
+
+The matrix below shows $n+m$ linearly independent column vectors, each one representing a feasible solution.
+\[
+\begin{array}{c|cccc|cccc}
+e_1    & 1       & 0 & \hdots & 0      &   &   &        &   \\
+e_2    & 0       & 1 &        & 0      &   & A &        &   \\
+\vdots & \vdots  &   & \ddots &        &   &   &        &   \\
+e_n    & 0       & 0 &        & 1      &   &   &        &   \\ 
+\hline
+i_1    & 0       & 0 & \hdots & 0      & 1 & 0 & \hdots & 0 \\
+i_2    & 0       & 0 &        & 0      & 0 & 1 &        & 0 \\
+\vdots & \vdots  &   & \ddots &        &   &   & \ddots &   \\
+i_m    & 0       & 0 &        & 0      & 0 & 0 &        & 1 \\
+\end{array}
+\]
+where in $A$ every column contains two $1$ values at $e_l$ and $e_r$, 
+corresponding to the two alignment edges that enable the interaction match $i_j = (l,r)$.
+
+Since these vectors are linearly independent, they're affinely independent, too.
+
+\vspace{5mm} \noindent \textbf{Proof: $x_i \leq 1$ is facet-defining}
+
+$\Rightarrow$ By setting the complete row $e_i$ to value $1$, we satisfy the constraint $x_i \leq 1$ with equality.
+This only leads to feasible solutions, if $e_i$ is not in conflict with another edge $e_j$. 
+These columns are still linearly independent.
+
+$\Leftarrow$ We are given $n+m$ affinely independent vectors with $e_i=1$ that prove the facet-property of $x_i \leq 1$.
+Now we assume that there is an edge $e_j, j\neq i$ that is in conflict with $e_i$. This means, in all $n+m$ 
+vectors the $e_j$ entry must be zero. These vectors are no longer affinely independent, as we will see:
+
+Let $k = m+n$. The vectors $v_1, ..., v_k$ are affinely independent, if and only if the vectors 
+$v_2-v_1, ..., v_k-v_1$ are linearly independent. These are $k-1$ vecors, but all of them have value zero in position $e_i$ and $e_j$!
+Obviously $k-1$ vectors with only $k-2$ rows cannot be linearly independent!
+
+\vspace{5mm} \noindent \textbf{Proof: $x_i \geq 0$ is facet-defining}
+
+?
+
 
 \end{document}
