@@ -53,8 +53,7 @@
   \item
   Solve for $n=4$ and $D_1 = \{2\}$.
   
-  \paragraph{Forward checking:}
-  
+  \paragraph{Forward checking:} $D_1 = D_2 = D_3 = D_4 = \{1,2,3,4\}$
   \begin{itemize} 
   \renewcommand{\labelitemi}{$\bullet$}
   \renewcommand{\labelitemii}{$\bullet$}
@@ -62,42 +61,56 @@
   \renewcommand{\labelitemiv}{$\bullet$}
         \item $x_1 = 2 \Rightarrow D_2 = \{1,2,3\}, D_3 = \{2,4\}, D_4 = \{2\}$
         \begin{itemize}
-            \item $x_2 = 1 \Rightarrow D_3 = \{2\}, D_4 = \{\}$
+            \item $x_2 = 1 \Rightarrow D_3 = \{2\}, D_4 = \{\}$ ... dead end.
             \item $x_2 = 2 \Rightarrow D_3 = \{2\}, D_4 = \{2\}$
             \begin{itemize}
-                \item $x_3 = 2 \Rightarrow D_4 = \{2\}$
-                \begin{itemize}
-                    \item $x_4 = 2 \Rightarrow$ Solution found: $(2,2,2,2)$
-                \end{itemize}
+                \item Solution found
             \end{itemize}
         \end{itemize}
   \end{itemize}
   
 
-  \paragraph{Patial lookahead:}
-  
+  \paragraph{Patial lookahead:} $D_1 = D_2 = D_3 = D_4 = \{1,2,3,4\}$
   \begin{itemize} 
   \renewcommand{\labelitemi}{$\bullet$}
   \renewcommand{\labelitemii}{$\bullet$}
   \renewcommand{\labelitemiii}{$\bullet$}
   \renewcommand{\labelitemiv}{$\bullet$}
-        \item $x_1 = 2 \Rightarrow D_2 = \{1,2,3\}, D_3 = \{2,4\}, D_4 = \{2\}$
+        \item $x_1 = 2 \Rightarrow D_2 = \{2\}$ because values $1$ or $3$ are not arc consistent with $x_4$. 
+              $D_3 = \{2\}$ because value $4$ is not arc consistent with $x_4$. $D_4 = \{2\}$.
         \begin{itemize}
-            \item $x_2 = 1 \Rightarrow D_3 = \{2\}, D_4 = \{\}$
-            \item $x_2 = 2 \Rightarrow D_3 = \{2\}, D_4 = \{2\}$
-            \begin{itemize}
-                \item $x_3 = 2 \Rightarrow D_4 = \{2\}$
-                \begin{itemize}
-                    \item $x_4 = 2 \Rightarrow$ Solution found: $(2,2,2,2)$
-                \end{itemize}
-            \end{itemize}
+            \item Solution found
         \end{itemize}
   \end{itemize}
-
+    
 
 \end{enumerate}
 
 \subsection{Task Scheduling}
+
+\subsection{Bin Packing}
+
+\subsection{IP}
+
+%Additionally to the variables $x_1, ..., x_n \in \{0,...,m\}$ we introduce decision variables $d_21,d_31,d_...,d_n \in \{0,1\}$.
+Each constraint of the form $|x_i - x_j| \geq 2$ can be rewritten as
+\[x_i - x_j \geq 2 \vee x_j - x_i \geq 2\]
+We can express the logical \emph{or} by adding a 
+new variable $d_{ij}$ (decision variable):
+\[ \begin{array} {ccc}
+x_i-x_j \geq 2 & \vee & x_j-x_i \geq 2 \\
+\Leftrightarrow x_i - x_j \geq d_{ij}(-2-m) +2 &\wedge& x_j - x_i \geq (1-d_{ij})(-2-m) +2 \\
+\Leftrightarrow x_i - x_j + (2+m)d_{ij} \geq 2 &\wedge& x_j - x_i - (2+m)d_{ij}\geq  -m \\
+\end{array} \]
+The decision variable decides which constraint must be satisfied: 
+\[ \begin{array} {cccc}
+\text{if } d_{ij} = 0 \qquad & x_i - x_j \geq 2 &\wedge& x_j - x_i \geq -m \\
+\text{if } d_{ij} = 1 \qquad & x_i - x_j \geq -m &\wedge& x_j - x_i + \geq  2 \\
+\end{array} \]
+Note that these equivalencies only hold since $x_i-x_j \geq 2$ and $x_j-x_i \geq 2$ cannot be true at the same time.
+
+In order to model these inequalities $\forall i\neq j$, we have to apply this technique to $n^2  -n$ constraints, 
+thus introducing $(n^2-n)$ new binary variables.
 
 
 \end{document}
