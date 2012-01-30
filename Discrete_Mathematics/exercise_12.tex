@@ -88,6 +88,56 @@
 
 \subsection{Task Scheduling}
 
+\begin{enumerate}
+\item 
+We have variables $A,B,C,D \in \{1,...,11\}$ and interpret them as the starting times of the tasks, 
+each of them on a seperate machine (tasks can run in parallel). 
+The upper level of 11 derives from the sum of all durations. An example schedule could look like this:
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\ \hline
+A & X & X & X &   &   &   &   &   &   &    &    \\ \hline
+B &   &   &   &   &   &   & X & X &   &    &    \\ \hline
+C &   &   &   &   & X & X & X & X &   &    &    \\ \hline
+D &   &   &   &   &   &   &   &   &   & X  &  X \\ \hline
+\end{tabular}
+
+Constraints would be
+\[ A + 3 \leq B,\quad A + 3 \leq C,\quad B + 2 \leq D,\quad C + 4 \leq D \]
+
+\item 
+We add two additional variables $S$ and $E$ with duration $0$, $D_S = \{1\}$ and $D_E = \{1,...,11\}$
+and derive the new constaints: 
+\[ S \leq X \text{ for } X \in \{A,B,C,D\}, \quad A+3 \leq E,\quad B+2 \leq E,\quad C+4 \leq E,\quad D+2 \leq E\]
+
+\item Arc consistency: We won't perform the AC-3 algorithm due to its complexity. 
+Instead, we use a rather intuitive iteration:
+
+\begin{itemize}
+\item[$D_A$] $ = \{1, 2, 3, 4, 5, 6, 7, 8 \}$ due to $A + 3 \leq B,\quad A + 3 \leq C$
+\item[$D_B$] $ = \{4, 5, 6, 7, 8, 9 \}$ due to $A + 3 \leq B,\quad B + 2 \leq D$
+\item[$D_C$] $ = \{4, 5, 6, 7\}$ due to $A + 3 \leq C,\quad C + 4 \leq D$
+\item[$D_D$] $ = \{8, 9, 10, 11\}$ due to $C + 4 \leq D$
+\item[$D_E$] $ = \{10, 11\}$ due to $D+2 \leq E$
+\item[$D_A$] $ = \{1, 2, 3, 4\}$ due to $A + 3 \leq C$
+\end{itemize}
+
+
+\item By fixing $E$ to the minimal value $10$, arc consistency can restrain the domains further:
+
+\begin{itemize}
+\item[$D_D$] $ = \{8\}$ due to $D + 2 \leq E$
+\item[$D_C$] $ = \{4\}$ due to $C + 4 \leq D$
+\item[$D_B$] $ = \{4, 5, 6\}$ due to $B + 2 \leq D$
+\item[$D_A$] $ = \{1\}$ due to $A + 3 \leq B$
+\end{itemize}
+ 
+    
+\end{enumerate}
+
+
 \subsection{Bin Packing}
 
 \subsection{IP}
