@@ -140,6 +140,39 @@ Instead, we use a rather intuitive iteration:
 
 \subsection{Bin Packing}
 
+\paragraph{Integer Programming}
+We model $n^2$ variables $x_{ij} \in \{0,1\}$ which state whether item $i$ is in bin $j$ or not.
+
+\begin{table}[hbt]
+\begin{tabular}{|c|ccc|}
+\hline
+         & bin 1    & $\hdots$ & bin $n$  \\ \hline
+item 1   & $x_{11}$ &          & $x_{1n}$ \\ 
+$\vdots$ &          & $\ddots$ &          \\ 
+item $n$ & $x_{n1}$ &          & $x_{nn}$ \\ \hline
+\end{tabular}\end{table}
+
+\noindent Each variable (row) fits into exactly one bin:
+\[ \sum_{j=1}^n x_{ij} = 1 \quad \text{ for } 1 \leq i \leq n \]
+Each bin has an upper limit of $c$:
+\[ \sum_{i=1}^n x_{ij}\cdot g_i \leq c \quad \text{ for } 1 \leq j \leq n \]
+Additionally, the first $m$ variables need to go into different bins:
+\[ \sum_{i=1}^m x_{ij} \leq 1 \quad \text{ for } 1 \leq j \leq n \]
+
+The different task is modeling an objective function. We here present an apprioach that 
+orders the bin in descending importance, such that bins on the right have a non-linearly 
+larger impact on the value of the objective function than the ones on the left. To that end 
+we introduce variables for the sums of the columns:
+\[ C_j = \sum_{i=1}^n x_{ij} \quad \text{ for } 1 \leq j \leq n \]
+Now we can state the objective function
+\[ Z = n^1 \cdot C_1 + n^2 \cdot C_2 + ... + n^n \cdot C_n \]
+which must be \textbf{minimized}!
+Note that this is still linear in the variables $x_{ij}$, because $n$ is a constant parameter.
+
+
+
+\paragraph{Constraint Programming}
+
 \subsection{IP}
 
 %Additionally to the variables $x_1, ..., x_n \in \{0,...,m\}$ we introduce decision variables $d_21,d_31,d_...,d_n \in \{0,1\}$.
